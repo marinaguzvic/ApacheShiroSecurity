@@ -3,8 +3,10 @@
     Created on : Aug 1, 2019, 7:21:42 PM
     Author     : MARINA
 --%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
-<fmt:setBundle basename="messages" />
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<fmt:setBundle basename="messages/messages" />
 
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -15,20 +17,26 @@
         <div class="card-body">
             <c:if test="${param.regSucc == true}">
                 <div id="status">
-                    <spring:message code="message.regSucc">    
-                    </spring:message>
+                    <div class="alert alert-success" role="alert">
+                        <spring:message code="message.regSucc">    
+                        </spring:message>
+                    </div>
                 </div>
             </c:if>
             <c:if test="${param.regError == true}">
                 <div id="error">
-                    <spring:message code="message.regError">   
-                    </spring:message>
+                    <div class="alert alert-danger" role="alert">
+                        <spring:message code="message.regError">   
+                        </spring:message>
+                    </div>
                 </div>
             </c:if>
             <c:if test="${param.error != null}">
-                <div id="error">
-                    <spring:message code="message.badCredentials">   
-                    </spring:message>
+                <div id="error2">
+                    <div class="alert alert-danger" role="alert">
+                        <spring:message code="message.badCredentials">   
+                        </spring:message>
+                    </div>
                 </div>
             </c:if>
             <form name="f" action="perform_login" method="POST">
@@ -36,14 +44,12 @@
                     <div class="form-label-group">
                         <input name="username" type="text" id="inputEmail" class="form-control" placeholder="Email address" required="required" autofocus="autofocus" value="">
                         <label for="inputEmail">Username</label>
-                        <fmt:message key="message.username" var="noUser" />
                     </div>
                 </div>
                 <div class="form-group">
                     <div class="form-label-group">
                         <input name="password" type="password" id="inputPassword" class="form-control" placeholder="Password" required="required">
                         <label for="inputPassword">Password</label>
-                        <fmt:message key="message.password" var="noPass" />
                     </div>
                 </div>
                 <div class="form-group">
@@ -63,3 +69,23 @@
         </div>
     </div>
 </div>
+
+<script type="text/javascript">
+    function validate() {
+        if (document.f.username.value == "" && document.f.password.value == "") {
+            alert("{noUser} and {noPass}");
+            document.f.username.focus();
+            return false;
+        }
+        if (document.f.username.value == "") {
+            alert("{noUser}");
+            document.f.username.focus();
+            return false;
+        }
+        if (document.f.password.value == "") {
+            alert("{noPass}");
+            document.f.password.focus();
+            return false;
+        }
+    }
+</script>

@@ -96,8 +96,9 @@ public class ApplicationConfig {
     @Bean
     public ReloadableResourceBundleMessageSource messageSource() {
         ReloadableResourceBundleMessageSource messageSource = new ReloadableResourceBundleMessageSource();
-        messageSource.setBasenames(new String[]{"messages/validation", "messages/messages"});
-//        messageSource.setUseCodeAsDefaultMessage(true);
+        messageSource.setBasenames("classpath:/messages/validation",
+                "classpath:/messages/messages");
+        messageSource.setUseCodeAsDefaultMessage(true);
         messageSource.setDefaultEncoding("UTF-8");
         messageSource.setCacheSeconds(0);
         return messageSource;
@@ -116,10 +117,9 @@ public class ApplicationConfig {
         cookieLocaleResolver.setDefaultLocale(Locale.ENGLISH);
         return cookieLocaleResolver;
     }
-    
 
     @Bean
-    public AuditService auditService(){
+    public AuditService auditService() {
         return new AuditServiceImpl();
     }
 //    @Bean

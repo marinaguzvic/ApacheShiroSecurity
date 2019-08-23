@@ -94,7 +94,7 @@ public class JPAConfig {
         Properties properties = new Properties();
         properties.setProperty("hibernate.dialect", "org.hibernate.dialect.MySQL5Dialect");
         properties.setProperty("hibernate.enable_lazy_load_no_trans", "true");
-        properties.setProperty("hibernate.hbm2ddl.auto", "create");
+//        properties.setProperty("hibernate.hbm2ddl.auto", "create");
         properties.setProperty(
                 "org.hibernate.envers.audit_table_suffix", "_AUDIT_LOG");
         return properties;

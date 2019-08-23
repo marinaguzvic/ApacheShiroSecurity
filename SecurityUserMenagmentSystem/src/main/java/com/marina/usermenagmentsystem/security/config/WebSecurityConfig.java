@@ -66,12 +66,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-//        auth.inMemoryAuthentication()
-//                .withUser("user1").password(passwordEncoder().encode("pass1")).roles("USER")
-//                .and()
-//                .withUser("user2").password(passwordEncoder().encode("pass2")).roles("USER")
-//                .and()
-//                .withUser("admin").password(passwordEncoder().encode("admin")).roles("ADMIN");
         auth.userDetailsService(userDetailsService());
     }
 
@@ -94,7 +88,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .successHandler(authenticationSuccessHandler())
                 .failureHandler(authenticationFailureHandler())
                 .loginProcessingUrl("/perform_login")
-//                .defaultSuccessUrl("/home", true)
                 .and()
                 .rememberMe()
                 .tokenRepository(persistentTokenRepository())
@@ -102,12 +95,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .logout()
                 .logoutUrl("/perform_logout")
-                
-//                .invalidateHttpSession(true)
                 .deleteCookies("JSESSIONID")
-                .logoutSuccessHandler(logoutSuccessHandler())
-                ;
-//                .key("uniqueAndSecret").tokenValiditySeconds(86400);
+                .logoutSuccessHandler(logoutSuccessHandler());
     }
 
     @Bean
