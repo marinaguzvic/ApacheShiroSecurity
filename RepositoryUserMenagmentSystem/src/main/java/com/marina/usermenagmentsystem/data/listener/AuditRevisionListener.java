@@ -5,11 +5,11 @@
  */
 package com.marina.usermenagmentsystem.data.listener;
 
+import com.marina.apacheshirosecurity.database.model.Account;
 import com.marina.usermenagmentsystem.data.model.revision.AuditRevisionEntity;
-import com.marina.usermenagmentsystem.security.app.Security;
+import org.apache.shiro.SecurityUtils;
 import org.hibernate.envers.RevisionListener;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 
 /**
@@ -18,14 +18,13 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class AuditRevisionListener implements RevisionListener{
-    @Autowired
-    Security security;
+
 
     @Override
     public void newRevision(Object o) {
         AuditRevisionEntity entity = (AuditRevisionEntity)o;
-        String name = SecurityContextHolder.getContext().getAuthentication().getName();
-        entity.setUsername(name);
+        Account a = (Account)SecurityUtils.getSubject().getPrincipal();
+        entity.setUsername(a.getUsername());
     }
     
 }

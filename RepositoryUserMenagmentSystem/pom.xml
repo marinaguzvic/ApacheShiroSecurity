@@ -67,12 +67,12 @@
             <version>${hibernate.version}</version>
         </dependency>
         <!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-core -->
-
-                <dependency>
+        <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>SecurityUserMenagmentSystem</artifactId>
+            <artifactId>ApacheShiroSecurity</artifactId>
             <version>${project.version}</version>
         </dependency>
+
     </dependencies>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

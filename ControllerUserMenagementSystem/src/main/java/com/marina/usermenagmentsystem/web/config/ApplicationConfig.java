@@ -100,6 +100,7 @@ public class ApplicationConfig {
                 "classpath:/messages/messages");
         messageSource.setUseCodeAsDefaultMessage(true);
         messageSource.setDefaultEncoding("UTF-8");
+        messageSource.setFallbackToSystemLocale(false);
         messageSource.setCacheSeconds(0);
         return messageSource;
     }

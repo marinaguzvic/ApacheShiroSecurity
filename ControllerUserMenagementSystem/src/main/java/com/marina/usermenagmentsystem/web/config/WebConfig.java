@@ -36,7 +36,8 @@ import org.springframework.web.servlet.view.tiles3.TilesViewResolver;
 @Configuration
 @ComponentScan(basePackages = {
     "com.marina.usermenagmentsystem.web",
-    "com.marina.usermenagmentsystem.security.controller"
+    "com.marina.usermenagmentsystem.security.controller",
+    "com.marina.apacheshirosecurity.controller"
 })
 public class WebConfig implements WebMvcConfigurer {
 

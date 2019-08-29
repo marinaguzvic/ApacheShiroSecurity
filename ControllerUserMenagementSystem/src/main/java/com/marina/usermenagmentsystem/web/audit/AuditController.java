@@ -5,7 +5,7 @@
  */
 package com.marina.usermenagmentsystem.web.audit;
 
-import com.marina.usermenagmentsystem.security.app.ReadAuditInfo;
+import com.marina.apacheshirosecurity.audit.ReadAuditInfo;
 import com.marina.usermenagmentsystem.service.AuditService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -20,7 +20,6 @@ public class AuditController implements ReadAuditInfo{
     @Autowired
     public AuditService auditService;
 
-    @Override
     public boolean hasCreatedEntity(String url, String username, String entityType) {
         return auditService.checkIfUserHasCreatedEntity(url, username, entityType);
     }

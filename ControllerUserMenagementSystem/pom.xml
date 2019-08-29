@@ -21,6 +21,12 @@
     
     <dependencies>
         <dependency>
+            <groupId>com.marina</groupId>
+            <artifactId>ApacheShiroSecurity</artifactId>
+            <version>1.0-SNAPSHOT</version>
+            <type>jar</type>
+        </dependency>
+        <dependency>
             <groupId>javax</groupId>
             <artifactId>javaee-web-api</artifactId>
             <version>7.0</version>
@@ -107,11 +113,7 @@
             <artifactId>ServiceUserManagementSystem</artifactId>
             <version>${project.version}</version>
         </dependency>
-        <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>SecurityUserMenagmentSystem</artifactId>
-            <version>${project.version}</version>
-        </dependency>
+
     </dependencies>
 
     <build>

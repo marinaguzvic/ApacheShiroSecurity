@@ -5,7 +5,10 @@
  */
 package com.marina.usermenagmentsystem.web.config;
 
-import com.marina.usermenagmentsystem.app.config.AppSecurityConfig;
+import com.marina.apacheshirosecurity.config.ApacheShiroConfig;
+import java.util.EnumSet;
+import javax.servlet.DispatcherType;
+import javax.servlet.FilterRegistration;
 import javax.servlet.MultipartConfigElement;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -30,8 +33,15 @@ public class АppliactionInitializer implements WebApplicationInitializer {
     public void onStartup(ServletContext sc) throws ServletException {
         AnnotationConfigWebApplicationContext rootContext = new AnnotationConfigWebApplicationContext();
         rootContext.register(ApplicationConfig.class);
-        rootContext.register(AppSecurityConfig.class);
+        rootContext.register(ApacheShiroConfig.class);
         sc.addListener(new ContextLoaderListener(rootContext));
+        
+        //Adding Shiro
+        FilterRegistration.Dynamic shiroFilter = sc.addFilter("shiroFilterFactoryBean", DelegatingFilterProxy.class);
+        shiroFilter.setInitParameter("targetFilterLifecycle", "true");
+        shiroFilter.addMappingForUrlPatterns(EnumSet.allOf(DispatcherType.class), false, "/*");
+        //
+        
         AnnotationConfigWebApplicationContext dispatcherWebContext = new AnnotationConfigWebApplicationContext();
         dispatcherWebContext.register(WebConfig.class);
         MultipartConfigElement multipartConfigElement = new MultipartConfigElement(TMP_FOLDER,
@@ -42,9 +52,6 @@ public class АppliactionInitializer implements WebApplicationInitializer {
         dispatcher.setLoadOnStartup(1);
         dispatcher.addMapping("/");
 
-        sc.addFilter("securityFilter", new DelegatingFilterProxy("springSecurityFilterChain"))
-                .addMappingForUrlPatterns(null, false, "/*");
-//    
     }
 
 }
